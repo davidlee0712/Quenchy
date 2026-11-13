@@ -22,7 +22,7 @@ export type WidgetDrinkButton = { label: string; name: string; ml: number };
 export type WidgetPending = { id: string; name: string; ml: number; ts: number };
 export type WidgetFriend = { name: string; drank: number; goal: number };
 
-export type QuenchyWidgetProps = {
+export type QuenchieWidgetProps = {
   day: string; // YYYY-MM-DD the totals belong to
   drank: number; // ml
   goal: number; // ml
@@ -32,7 +32,7 @@ export type QuenchyWidgetProps = {
   friends: WidgetFriend[];
 };
 
-export const EMPTY_WIDGET: QuenchyWidgetProps = {
+export const EMPTY_WIDGET: QuenchieWidgetProps = {
   day: '',
   drank: 0,
   goal: 2000,
@@ -45,9 +45,9 @@ export const EMPTY_WIDGET: QuenchyWidgetProps = {
   friends: [],
 };
 
-export const QuenchyWidget = createWidget<QuenchyWidgetProps>(
-  'Quenchy',
-  (props: QuenchyWidgetProps, env: WidgetEnvironment) => {
+export const QuenchieWidget = createWidget<QuenchieWidgetProps>(
+  'Quenchie',
+  (props: QuenchieWidgetProps, env: WidgetEnvironment) => {
     'widget';
     const WATER = '#1d93c9';
     const GOOD = '#1e8a5a';
@@ -88,7 +88,7 @@ export const QuenchyWidget = createWidget<QuenchyWidgetProps>(
 
     if (family === 'accessoryCircular') {
       return (
-        <Gauge value={pct} min={0} max={1} modifiers={[gaugeStyle('circularCapacity'), widgetURL('quenchy://')]}>
+        <Gauge value={pct} min={0} max={1} modifiers={[gaugeStyle('circularCapacity'), widgetURL('quenchie://')]}>
           <Text>{Math.round(pct * 100) + '%'}</Text>
         </Gauge>
       );
@@ -96,7 +96,7 @@ export const QuenchyWidget = createWidget<QuenchyWidgetProps>(
 
     if (family === 'accessoryRectangular') {
       return (
-        <VStack alignment="leading" spacing={2} modifiers={[widgetURL('quenchy://')]}>
+        <VStack alignment="leading" spacing={2} modifiers={[widgetURL('quenchie://')]}>
           <Text modifiers={[font({ size: 13, weight: 'semibold' })]}>Water</Text>
           <Text modifiers={[monospacedDigit()]}>{amount(drank) + ' of ' + amount(goal)}</Text>
           <Gauge value={pct} min={0} max={1} modifiers={[gaugeStyle('linearCapacity')]} />
@@ -129,7 +129,7 @@ export const QuenchyWidget = createWidget<QuenchyWidgetProps>(
         <VStack
           alignment="leading"
           spacing={6}
-          modifiers={[containerBackground(BG, 'widget'), widgetURL('quenchy://')]}>
+          modifiers={[containerBackground(BG, 'widget'), widgetURL('quenchie://')]}>
           <HStack spacing={8}>
             {ring}
             <VStack alignment="leading" spacing={1}>
@@ -151,9 +151,9 @@ export const QuenchyWidget = createWidget<QuenchyWidgetProps>(
     // systemMedium (and larger): ring + totals on the left, buttons and friends on the right.
     const friends = (props.friends || []).slice(0, family === 'systemMedium' ? 2 : 5);
     return (
-      <HStack spacing={14} modifiers={[containerBackground(BG, 'widget'), widgetURL('quenchy://')]}>
+      <HStack spacing={14} modifiers={[containerBackground(BG, 'widget'), widgetURL('quenchie://')]}>
         <VStack alignment="leading" spacing={6}>
-          <Text modifiers={[font({ size: 13, weight: 'semibold' }), foregroundStyle(MUTED)]}>Quenchy</Text>
+          <Text modifiers={[font({ size: 13, weight: 'semibold' }), foregroundStyle(MUTED)]}>Quenchie</Text>
           {ring}
           <Text modifiers={[font({ size: 16, weight: 'bold', design: 'rounded' }), monospacedDigit(), lineLimit(1)]}>
             {amount(drank)}

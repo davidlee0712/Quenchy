@@ -1,4 +1,4 @@
-# Quenchy
+# Quenchie
 
 A water tracker for iPhone. Log what you drink, see how much is left for the day,
 get a recommended goal from your age and sex, link up with friends to see each
@@ -19,7 +19,7 @@ Built with Expo (React Native) and Supabase.
 
 ## 1. Set up the database (Supabase, about 5 minutes)
 
-1. Go to supabase.com, sign in, and create a project called `quenchy`. Pick any password and region.
+1. Go to supabase.com, sign in, and create a project called `quenchie`. Pick any password and region.
 2. When it's ready, open **SQL Editor** in the left sidebar, then **New query**.
 3. Open [`supabase/schema.sql`](supabase/schema.sql) in this repo, copy all of it, paste it in, and press **Run**.
    You should see "Success. No rows returned."
@@ -67,7 +67,7 @@ EXPO_PUBLIC_SUPABASE_ANON_KEY=YOUR-ANON-OR-PUBLISHABLE-KEY
 1. Open **Xcode → Settings → Accounts**, press **+**, choose **Apple ID**, and sign in.
 2. Plug your iPhone into the Mac, unlock it, and tap **Trust** if asked.
 
-## 5. Install Quenchy on your iPhone
+## 5. Install Quenchie on your iPhone
 
 ```bash
 npx expo run:ios --device
@@ -75,12 +75,12 @@ npx expo run:ios --device
 
 Pick your iPhone from the list. The first build takes several minutes. If it asks to install CocoaPods, say yes.
 
-**If the build stops with a signing error** ("Signing for Quenchy requires a development team"):
+**If the build stops with a signing error** ("Signing for Quenchie requires a development team"):
 
-1. Run `open ios/Quenchy.xcworkspace`
-2. In Xcode, click **Quenchy** at the top of the left sidebar, then the **Quenchy** target, then **Signing & Capabilities**.
+1. Run `open ios/Quenchie.xcworkspace`
+2. In Xcode, click **Quenchie** at the top of the left sidebar, then the **Quenchie** target, then **Signing & Capabilities**.
 3. Tick **Automatically manage signing** and choose your **Team** (your name, "Personal Team").
-4. If it says the bundle identifier isn't available, add `QUENCHY_BUNDLE_ID=com.yourname.quenchy` to `.env.local`, then run `npx expo prebuild --clean` and step 5 again.
+4. If it says the bundle identifier isn't available, add `QUENCHIE_BUNDLE_ID=com.yourname.quenchie` to `.env.local`, then run `npx expo prebuild --clean` and step 5 again.
 5. Run `npx expo run:ios --device` again.
 
 **On the iPhone, the first time:**
@@ -97,7 +97,7 @@ The widget and the app share data through an "App Group", which Apple only allow
 1. Join the Apple Developer Program and find your **Team ID** at developer.apple.com → Account → Membership.
 2. Add these lines to `.env.local`:
    ```
-   QUENCHY_WIDGET=1
+   QUENCHIE_WIDGET=1
    APPLE_TEAM_ID=YOURTEAMID
    ```
 3. Rebuild:
@@ -107,7 +107,7 @@ The widget and the app share data through an "App Group", which Apple only allow
    ```bash
    npx expo run:ios --device
    ```
-4. Open Quenchy once. Then long-press your Home Screen, tap **Edit → Add Widget**, search for **Quenchy**, and pick a size.
+4. Open Quenchie once. Then long-press your Home Screen, tap **Edit → Add Widget**, search for **Quenchie**, and pick a size.
    - **Small:** ring, amount left, and **+ Glass / + Bottle** buttons
    - **Medium:** the same, plus your friends' progress
    - **Lock Screen:** a ring, a progress bar, or a one-line "x ml left"
@@ -118,7 +118,7 @@ Drinks you tap on the widget show up on the widget straight away and are saved t
 
 ## Linking with a friend
 
-Your friend needs Quenchy on their phone too.
+Your friend needs Quenchie on their phone too.
 
 - **Free account:** plug their iPhone into your Mac and run step 5 with their phone selected. Same 7-day rule.
 - **Paid account:** share it through TestFlight instead (no cable, lasts 90 days).
@@ -150,6 +150,6 @@ npx tsc --noEmit
 npx eslint src app.config.ts
 ```
 
-- Screens live in `src/app` (Expo Router), shared state in `src/lib/store.tsx`, the widget in `src/widgets/quenchy-widget.tsx`.
+- Screens live in `src/app` (Expo Router), shared state in `src/lib/store.tsx`, the widget in `src/widgets/quenchie-widget.tsx`.
 - The function marked `'widget'` is copied into the widget as source text, so it can't use variables or helpers defined outside it.
 - `ios/` is generated. Change native settings in `app.config.ts`, then run `npx expo prebuild --clean`.

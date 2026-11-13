@@ -74,7 +74,7 @@ export default function Friends() {
         <H2>Link with someone</H2>
         <Muted>Send them your code. When either of you adds the other&apos;s code, you&apos;re linked both ways.</Muted>
         <Pressable
-          onPress={() => Share.share({ message: `Add me on Quenchy! My friend code is ${myCode}` })}
+          onPress={() => Share.share({ message: `Add me on Quenchie! My friend code is ${myCode}` })}
           style={({ pressed }) => [styles.rowBetween, { backgroundColor: c.bg, borderRadius: 12, padding: 14, opacity: pressed ? 0.7 : 1 }]}>
           <View>
             <Muted>Your friend code</Muted>

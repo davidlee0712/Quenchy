@@ -33,7 +33,7 @@ export default function SettingsScreen() {
       const ok = await applyReminders(next);
       if (!ok) {
         await s.saveSettings({ reminders: { ...next, enabled: false } });
-        Alert.alert('Notifications are off', 'Allow notifications for Quenchy in the iPhone Settings app to get reminders.');
+        Alert.alert('Notifications are off', 'Allow notifications for Quenchie in the iPhone Settings app to get reminders.');
       }
     } catch (e) {
       fail(e);
@@ -187,7 +187,7 @@ export default function SettingsScreen() {
         </Row>
         <Muted>Signed in as {s.session?.user.email}</Muted>
         <Divider />
-        <Muted>Home Screen widget: {widgetEnabled ? 'on. Long-press your Home Screen and tap Edit, then Add Widget, to add Quenchy.' : 'off in this build (see the README to turn it on).'}</Muted>
+        <Muted>Home Screen widget: {widgetEnabled ? 'on. Long-press your Home Screen and tap Edit, then Add Widget, to add Quenchie.' : 'off in this build (see the README to turn it on).'}</Muted>
         <PrimaryButton title="Sign out" kind="danger" onPress={() => s.signOut()} />
       </Card>
     </Screen>

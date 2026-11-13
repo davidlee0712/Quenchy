@@ -49,7 +49,7 @@ export default function SignIn() {
     <KeyboardAvoidingView style={{ flex: 1, backgroundColor: c.brand }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', padding: 24, gap: 24 }} keyboardShouldPersistTaps="handled">
         <View style={{ gap: 6 }}>
-          <Text style={{ color: '#fff', fontSize: 40, fontWeight: '900', letterSpacing: -1 }}>Quenchy</Text>
+          <Text style={{ color: '#fff', fontSize: 40, fontWeight: '900', letterSpacing: -1 }}>Quenchie</Text>
           <Text style={{ color: '#cfe9f5', fontSize: 16 }}>Track every glass. Cheer on your friends.</Text>
         </View>
         <View style={{ backgroundColor: c.surface, borderRadius: 16, padding: 18, gap: 12 }}>

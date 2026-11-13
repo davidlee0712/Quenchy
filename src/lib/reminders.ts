@@ -36,7 +36,7 @@ export async function applyReminders(r: Settings['reminders']): Promise<boolean>
   const hours = reminderHours(r);
   for (let i = 0; i < hours.length; i++) {
     await Notifications.scheduleNotificationAsync({
-      content: { title: 'Quenchy', body: MESSAGES[i % MESSAGES.length] },
+      content: { title: 'Quenchie', body: MESSAGES[i % MESSAGES.length] },
       trigger: { type: Notifications.SchedulableTriggerInputTypes.DAILY, hour: hours[i], minute: 0 },
     });
   }

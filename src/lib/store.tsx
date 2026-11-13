@@ -49,7 +49,7 @@ type Store = Data & {
 const EMPTY: Data = { profile: null, settings: DEFAULT_SETTINGS, drinks: [], friends: [] };
 const StoreContext = createContext<Store | null>(null);
 
-const cacheKey = (userId: string) => `quenchy-cache-v1-${userId}`;
+const cacheKey = (userId: string) => `quenchie-cache-v1-${userId}`;
 function readCache(userId: string): Data | null {
   try {
     const raw = localStorage.getItem(cacheKey(userId));
@@ -164,7 +164,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
     if (!userId) return;
     // refresh() only sets state after its network request finishes.
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    refresh().catch((e) => console.warn('[Quenchy] Load failed', e));
+    refresh().catch((e) => console.warn('[Quenchie] Load failed', e));
   }, [userId, refresh]);
 
   useEffect(() => {
@@ -180,7 +180,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
       timer = setTimeout(() => refresh().catch(() => {}), 500);
     };
     const channel = supabase
-      .channel('quenchy-' + userId)
+      .channel('quenchie-' + userId)
       .on('postgres_changes', { event: '*', schema: 'public', table: 'drinks' }, soon)
       .on('postgres_changes', { event: '*', schema: 'public', table: 'profiles' }, soon)
       .on('postgres_changes', { event: '*', schema: 'public', table: 'friendships' }, soon)
@@ -329,7 +329,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
         },
         saved ? [] : pending
       );
-    }).catch((e) => console.warn('[Quenchy] Widget sync failed', e));
+    }).catch((e) => console.warn('[Quenchie] Widget sync failed', e));
   }, [userId, refresh]);
 
   useEffect(() => {

@@ -1,21 +1,21 @@
 import type { ConfigContext, ExpoConfig } from 'expo/config';
 
-// Turn the Home Screen widget on with QUENCHY_WIDGET=1 in .env.local.
+// Turn the Home Screen widget on with QUENCHIE_WIDGET=1 in .env.local.
 // The widget shares data with the app through an App Group, which needs a paid
 // Apple Developer account. With a free account, leave it off.
-const widgetEnabled = process.env.QUENCHY_WIDGET === '1';
+const widgetEnabled = process.env.QUENCHIE_WIDGET === '1';
 
 // Must be unique on Apple's side. Change it in .env.local if Xcode says it's taken.
-const bundleIdentifier = process.env.QUENCHY_BUNDLE_ID || 'io.github.davidlee0712.quenchy';
+const bundleIdentifier = process.env.QUENCHIE_BUNDLE_ID || 'io.github.davidlee0712.quenchie';
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
-  name: 'Quenchy',
-  slug: 'quenchy',
+  name: 'Quenchie',
+  slug: 'quenchie',
   version: '1.0.0',
   orientation: 'portrait',
   icon: './assets/images/icon.png',
-  scheme: 'quenchy',
+  scheme: 'quenchie',
   userInterfaceStyle: 'automatic',
   ios: {
     icon: './assets/expo.icon',
@@ -49,12 +49,12 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
             {
               widgets: [
                 {
-                  name: 'Quenchy',
-                  displayName: 'Quenchy',
+                  name: 'Quenchie',
+                  displayName: 'Quenchie',
                   description: "Today's water, quick-log buttons and your friends.",
                   ios: {
                     // Lets the widget draw before the app has been opened.
-                    initialLayout: './src/widgets/quenchy-widget.tsx',
+                    initialLayout: './src/widgets/quenchie-widget.tsx',
                     supportedFamilies: [
                       'systemSmall',
                       'systemMedium',
