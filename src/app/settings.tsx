@@ -128,7 +128,7 @@ export default function SettingsScreen() {
         <View style={{ backgroundColor: c.bg, borderRadius: 12, padding: 14, gap: 6 }}>
           {rec ? (
             <>
-              <Eyebrow>Your daily need from drinks</Eyebrow>
+              <Eyebrow>Recommended from drinks each day</Eyebrow>
               <Text style={{ color: c.ink, fontSize: 30, fontWeight: '800', fontVariant: ['tabular-nums'] }}>{fmtU(rec.total, unit)}</Text>
               <Muted>
                 {[
@@ -146,8 +146,9 @@ export default function SettingsScreen() {
                 <Text style={{ color: c.good, fontWeight: '600' }}>✓ This is your daily goal.</Text>
               )}
               <Muted style={{ fontSize: 12 }}>
-                A general guideline based on the US National Academies&apos; intake recommendations. Food usually supplies about 20% more. Kidney,
-                heart or other conditions can change what&apos;s right for you, so check with a doctor if any apply.
+                Based on the US National Academies&apos; adequate intake, which is what healthy people typically drink, not a strict minimum. Food
+                supplies about 20% more. Thirst and pale-yellow urine are good day-to-day guides. Kidney, heart or other conditions can change
+                what&apos;s right for you, so check with a doctor if any apply.
               </Muted>
             </>
           ) : (

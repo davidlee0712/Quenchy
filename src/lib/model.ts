@@ -6,10 +6,12 @@ export type Sex = '' | 'female' | 'male' | 'pregnant' | 'breastfeeding';
 export type Activity = 'sitting' | 'onFeet' | 'physical';
 
 // How active a normal day is, separate from workouts. Walking all day counts here.
+// Rough estimates from the ~1 ml of water per extra kcal burned rule of thumb
+// (all-day walking ~250-400 kcal, physical labour ~800+ kcal above a desk day).
 export const ACTIVITY_LEVELS: { value: Activity; label: string; hint: string; ml: number }[] = [
   { value: 'sitting', label: 'Mostly sitting', hint: 'Desk, classes, driving. Some short walks.', ml: 0 },
   { value: 'onFeet', label: 'On my feet a lot', hint: 'Walking most of the day, like campus, retail or 10,000+ steps.', ml: 250 },
-  { value: 'physical', label: 'Physical work', hint: 'Lifting, carrying or labour for hours.', ml: 500 },
+  { value: 'physical', label: 'Physical work', hint: 'Lifting, carrying or labour for hours.', ml: 750 },
 ];
 
 export type Drink = {
