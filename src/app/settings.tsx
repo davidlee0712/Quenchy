@@ -3,7 +3,7 @@ import { Alert, Pressable, Switch, Text, TextInput, View } from 'react-native';
 
 import { Card, Divider, Eyebrow, H2, Muted, PrimaryButton, Screen, inputStyle, styles } from '@/components/ui';
 import { radius, useColors } from '@/constants/theme';
-import { fmtU, fromUnit, recommend, type Settings, type Sex, toUnit, type Unit, uid } from '@/lib/model';
+import { ACTIVITY_LEVELS, fmtU, fromUnit, recommend, type Settings, type Sex, toUnit, type Unit, uid } from '@/lib/model';
 import { applyReminders, reminderHours } from '@/lib/reminders';
 import { useStore } from '@/lib/store';
 import { widgetEnabled } from '@/lib/widget-sync';
@@ -72,10 +72,56 @@ export default function SettingsScreen() {
             ))}
           </View>
         </View>
-        <Row label="Exercise on a typical day">
-          <NumberField value={st.body.exercise || null} onCommit={(v) => saveBody({ exercise: Math.max(0, Math.round(v ?? 0)) })} placeholder="0" />
-          <Muted>min</Muted>
-        </Row>
+        <View style={{ gap: 8 }}>
+          <Text style={{ color: c.ink, fontWeight: '500' }}>How active is a normal day?</Text>
+          <Muted>Count everyday walking here, not as exercise.</Muted>
+          <View style={{ gap: 8 }}>
+            {ACTIVITY_LEVELS.map((a) => {
+              const on = st.body.activity === a.value;
+              return (
+                <Pressable
+                  key={a.value}
+                  onPress={() => saveBody({ activity: a.value })}
+                  accessibilityRole="radio"
+                  accessibilityState={{ checked: on }}
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: 12,
+                    padding: 12,
+                    borderRadius: 12,
+                    borderWidth: on ? 2 : 1,
+                    borderColor: on ? c.water : c.line,
+                  }}>
+                  <View
+                    style={{
+                      width: 20,
+                      height: 20,
+                      borderRadius: 10,
+                      borderWidth: 2,
+                      borderColor: on ? c.water : c.muted,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    {on ? <View style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: c.water }} /> : null}
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={{ color: c.ink, fontWeight: '600' }}>{a.label}</Text>
+                    <Muted>{a.hint}</Muted>
+                  </View>
+                  <Muted style={{ fontVariant: ['tabular-nums'] }}>{a.ml ? `+${fmtU(a.ml, unit)}` : ''}</Muted>
+                </Pressable>
+              );
+            })}
+          </View>
+        </View>
+        <View style={{ gap: 4 }}>
+          <Row label="Workouts on a typical day">
+            <NumberField value={st.body.exercise || null} onCommit={(v) => saveBody({ exercise: Math.max(0, Math.round(v ?? 0)) })} placeholder="0" />
+            <Muted>min</Muted>
+          </Row>
+          <Muted>Only exercise that makes you sweat, like running, gym, sports or a fast bike ride. Leave it at 0 if you don&apos;t work out.</Muted>
+        </View>
         <Row label="I live somewhere hot or humid">
           <Switch value={st.body.hot} onValueChange={(v) => saveBody({ hot: v })} trackColor={{ true: c.water }} />
         </Row>
@@ -87,7 +133,8 @@ export default function SettingsScreen() {
               <Muted>
                 {[
                   `Base for ${rec.group}: ${fmtU(rec.base, unit)} (about ${Math.round(rec.base / 240)} cups)`,
-                  rec.exercise ? `exercise +${fmtU(rec.exercise, unit)}` : '',
+                  rec.activity ? `active day +${fmtU(rec.activity, unit)}` : '',
+                  rec.exercise ? `workouts +${fmtU(rec.exercise, unit)}` : '',
                   rec.hot ? `hot climate +${fmtU(rec.hot, unit)}` : '',
                 ]
                   .filter(Boolean)

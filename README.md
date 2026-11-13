@@ -134,11 +134,11 @@ Then in the app: **Friends** tab → share your 6-letter code → they type it i
 | **Progress** | 7- or 30-day chart against your goal, average, days at goal, best day, top drink |
 | **Friends** | Your friend code, add friends, sharing switch, each friend's day, streak and week |
 | **+ button** | Search drinks, All / Recent / Frequent / My drinks, serving size × servings, custom drinks |
-| **Settings** (gear) | Age, sex, exercise, climate, so you get a recommended daily amount; goal, bottle size, ml or fl oz, saved drinks, reminders, sign out |
+| **Settings** (gear) | Age, sex, daily activity, workouts, climate, so you get a recommended daily amount; goal, bottle size, ml or fl oz, saved drinks, reminders, sign out |
 
 The recommended amount follows the US National Academies' guidance for water from drinks
 (about 2.2 L for women and 3.0 L for men aged 19 and over, less for children, more in pregnancy and breastfeeding),
-plus about 350 ml per 30 minutes of exercise and 500 ml for a hot climate. It's a general guideline, not medical advice.
+plus 250 ml for a day on your feet (lots of walking) or 500 ml for physical work, about 350 ml per 30 minutes of sweaty exercise, and 500 ml for a hot climate. It's a general guideline, not medical advice.
 
 ## For developers
 

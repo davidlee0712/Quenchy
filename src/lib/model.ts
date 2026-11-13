@@ -3,6 +3,14 @@
 export type Meal = 'morning' | 'afternoon' | 'evening';
 export type Unit = 'ml' | 'oz';
 export type Sex = '' | 'female' | 'male' | 'pregnant' | 'breastfeeding';
+export type Activity = 'sitting' | 'onFeet' | 'physical';
+
+// How active a normal day is, separate from workouts. Walking all day counts here.
+export const ACTIVITY_LEVELS: { value: Activity; label: string; hint: string; ml: number }[] = [
+  { value: 'sitting', label: 'Mostly sitting', hint: 'Desk, classes, driving. Some short walks.', ml: 0 },
+  { value: 'onFeet', label: 'On my feet a lot', hint: 'Walking most of the day, like campus, retail or 10,000+ steps.', ml: 250 },
+  { value: 'physical', label: 'Physical work', hint: 'Lifting, carrying or labour for hours.', ml: 500 },
+];
 
 export type Drink = {
   id: string;
@@ -29,7 +37,7 @@ export type Settings = {
   bottleMl: number;
   unit: Unit;
   mine: SavedDrink[];
-  body: { age: number | null; sex: Sex; exercise: number; hot: boolean };
+  body: { age: number | null; sex: Sex; activity: Activity; exercise: number; hot: boolean };
   reminders: { enabled: boolean; startHour: number; endHour: number; everyHours: number };
 };
 
@@ -37,7 +45,7 @@ export const DEFAULT_SETTINGS: Settings = {
   bottleMl: 750,
   unit: 'ml',
   mine: [],
-  body: { age: null, sex: '', exercise: 0, hot: false },
+  body: { age: null, sex: '', activity: 'sitting', exercise: 0, hot: false },
   reminders: { enabled: false, startHour: 9, endHour: 21, everyHours: 2 },
 };
 
@@ -184,10 +192,10 @@ export function streak(totals: Map<string, number>, goal: number): number {
 
 // ---------- daily need ----------
 
-export type Recommendation = { total: number; base: number; exercise: number; hot: number; group: string };
+export type Recommendation = { total: number; base: number; activity: number; exercise: number; hot: number; group: string };
 
 // Water from drinks per day, based on the US National Academies' adequate intake
-// (total water minus the ~20% that usually comes from food), plus exercise and heat.
+// (total water minus the ~20% that usually comes from food), plus daily activity, workouts and heat.
 export function recommend(body: Settings['body']): Recommendation | null {
   const age = Number(body.age);
   if (!age || !body.sex) return null;
@@ -201,9 +209,10 @@ export function recommend(body: Settings['body']): Recommendation | null {
   else [base, group] = [male ? 3000 : 2200, `${male ? 'men' : 'women'} 19+`];
   if (age >= 14 && body.sex === 'pregnant') [base, group] = [2300, 'pregnancy'];
   if (age >= 14 && body.sex === 'breastfeeding') [base, group] = [3100, 'breastfeeding'];
-  const exercise = Math.max(0, Number(body.exercise) || 0) * 12; // ~350 ml per 30 min
+  const activity = ACTIVITY_LEVELS.find((a) => a.value === body.activity)?.ml ?? 0;
+  const exercise = Math.max(0, Number(body.exercise) || 0) * 12; // ~350 ml per 30 min of sweaty exercise
   const hot = body.hot ? 500 : 0;
-  return { total: Math.round((base + exercise + hot) / 50) * 50, base, exercise, hot, group };
+  return { total: Math.round((base + activity + exercise + hot) / 50) * 50, base, activity, exercise, hot, group };
 }
 
 export function uid(): string {
